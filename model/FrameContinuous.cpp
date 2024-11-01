@@ -90,17 +90,17 @@ namespace glabels
 			{
 				QString wStr = StrUtil::formatFraction( mW.in() );
 
-				return QString().sprintf( "%s %s %s",
-				                          qPrintable(wStr),
-				                          qPrintable(units.toTrName()),
-				                          qPrintable(tr("wide")) );
+				return QString( "%1 %2 %3")
+				    .arg(wStr)
+				    .arg(units.toTrName())
+				    .arg(tr("wide"));
 			}
 			else
 			{
-				return QString().sprintf( "%.3f %s %s",
-				                          mW.inUnits(units),
-				                          qPrintable(units.toTrName()),
-				                          qPrintable(tr("wide")) );
+				return QString( "%1 %2 %3")
+				    .arg(mW.inUnits(units))
+				    .arg(units.toTrName())
+				    .arg(tr("wide"));
 			}
 		}
 
