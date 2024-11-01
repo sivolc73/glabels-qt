@@ -310,7 +310,7 @@ namespace glabels
 		///
 		/// Matrix Property Setter
 		///
-		void ModelObject::setMatrix( const QTransform& value )
+		void ModelObject::setTransform( const QTransform& value )
 		{
 			if ( mMatrix != value )
 			{
@@ -1238,12 +1238,12 @@ namespace glabels
 			{
 				painter->save();
 				painter->translate( mShadowX.pt(), mShadowY.pt() );
-				painter->setMatrix( mMatrix, true );
+				painter->setTransform( mMatrix, true );
 				drawShadow( painter, inEditor, record, variables );
 				painter->restore();
 			}
 
-			painter->setMatrix( mMatrix, true );
+			painter->setTransform( mMatrix, true );
 			drawObject( painter, inEditor, record, variables );
 
 			painter->restore();
@@ -1258,7 +1258,7 @@ namespace glabels
 			painter->save();
 
 			painter->translate( mX0.pt(), mY0.pt() );
-			painter->setMatrix( mMatrix, true );
+			painter->setTransform( mMatrix, true );
 
 			if ( mOutline )
 			{

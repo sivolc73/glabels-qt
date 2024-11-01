@@ -149,7 +149,7 @@ namespace glabels
 			// Transformation Matrix Property
 			//
 			QTransform transform() const;
-			void setMatrix( const QTransform& value );
+			void setTransform( const QTransform& value );
 
 
 			//
