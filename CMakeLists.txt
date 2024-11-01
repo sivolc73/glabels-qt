@@ -110,12 +110,12 @@ if (MINGW)
    set (CMAKE_PREFIX_PATH ${MINGW_BASE_DIR} )
 endif ()
 
-find_package (Qt5Core 5.15 REQUIRED)
-find_package (Qt5Widgets 5.15 REQUIRED)
-find_package (Qt5PrintSupport 5.15 REQUIRED)
-find_package (Qt5Xml 5.15 REQUIRED)
-find_package (Qt5Svg 5.15 REQUIRED)
-find_package (Qt5LinguistTools)
+find_package (Qt6Core REQUIRED)
+find_package (Qt6Widgets REQUIRED)
+find_package (Qt6PrintSupport REQUIRED)
+find_package (Qt6Xml REQUIRED)
+find_package (Qt6Svg REQUIRED)
+find_package (Qt6LinguistTools)
 
 if (WIN32)
    # Locate Qt directories
@@ -131,7 +131,7 @@ find_package (GnuBarcode 0.98 QUIET)
 find_package (LibQrencode 3.4 QUIET)
 find_package (LibZint 2.6 EXACT QUIET)
 # Unit testing support
-find_package (Qt5Test 5.15 QUIET)
+find_package (Qt6Test QUIET)
 
 
 #=======================================
