@@ -303,18 +303,13 @@ namespace glabels
 				
 			case 'd':
 			case 'i':
-				return QString::asprintf( mFormat.toStdString().c_str(),
-				                          value.toLongLong(nullptr,0) );
-				break;
-				
+				return QString(mFormat).arg(value.toLongLong(nullptr, 0));
 
 			case 'u':
 			case 'x':
 			case 'X':
 			case 'o':
-				return QString::asprintf( mFormat.toStdString().c_str(),
-				                          value.toULongLong(nullptr,0) );
-				break;
+				return QString(mFormat).arg(value.toULongLong(nullptr, 0));
 
 			case 'f':
 			case 'F':
@@ -322,20 +317,14 @@ namespace glabels
 			case 'E':
 			case 'g':
 			case 'G':
-				return QString::asprintf( mFormat.toStdString().c_str(),
-				                          value.toDouble() );
-				break;
+				return QString(mFormat).arg(value.toDouble());
 
 			case 's':
-				return QString::asprintf( mFormat.toStdString().c_str(),
-				                          value.toStdString().c_str() );
-				break;
+				return QString(mFormat).arg(value);
 
 			default:
 				// Invalid format
 				return "";
-				break;
-
 			}
 		}
 	
