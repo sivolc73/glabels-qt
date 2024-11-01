@@ -112,7 +112,7 @@ namespace glabels
 		{
 			Token token;
 
-			QStringRef s = &mString;
+			QStringView s = &mString;
 			while ( s.size() )
 			{
 				SubstitutionField field;

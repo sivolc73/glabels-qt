@@ -26,7 +26,7 @@
 #include "merge/Record.h"
 
 #include <QString>
-#include <QStringRef>
+#include <QStringView>
 
 
 namespace glabels
@@ -48,19 +48,19 @@ namespace glabels
 			QChar   formatType() const;
 			bool    newLine() const;
 
-			static bool parse( QStringRef& s, SubstitutionField& field );
+			static bool parse( QStringView& s, SubstitutionField& field );
 
 		private:
-			static bool parseFieldName( QStringRef& s, SubstitutionField& field );
-			static bool parseModifier( QStringRef& s, SubstitutionField& field );
-			static bool parseDefaultValueModifier( QStringRef& s, SubstitutionField& field );
-			static bool parseFormatModifier( QStringRef& s, SubstitutionField& field );
-			static bool parseFormatFlags( QStringRef& s, SubstitutionField& field );
-			static bool parseFormatWidth( QStringRef& s, SubstitutionField& field );
-			static bool parseFormatPrecision( QStringRef& s, SubstitutionField& field );
-			static bool parseFormatType( QStringRef& s, SubstitutionField& field );
-			static bool parseNaturalInteger( QStringRef& s, SubstitutionField& field );
-			static bool parseNewLineModifier( QStringRef& s, SubstitutionField& field );
+			static bool parseFieldName( QStringView& s, SubstitutionField& field );
+			static bool parseModifier( QStringView& s, SubstitutionField& field );
+			static bool parseDefaultValueModifier( QStringView& s, SubstitutionField& field );
+			static bool parseFormatModifier( QStringView& s, SubstitutionField& field );
+			static bool parseFormatFlags( QStringView& s, SubstitutionField& field );
+			static bool parseFormatWidth( QStringView& s, SubstitutionField& field );
+			static bool parseFormatPrecision( QStringView& s, SubstitutionField& field );
+			static bool parseFormatType( QStringView& s, SubstitutionField& field );
+			static bool parseNaturalInteger( QStringView& s, SubstitutionField& field );
+			static bool parseNewLineModifier( QStringView& s, SubstitutionField& field );
 
 			QString formatValue( const QString& value ) const;
 

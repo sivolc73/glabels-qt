@@ -37,7 +37,7 @@ namespace glabels
 		SubstitutionField::SubstitutionField( const QString& string )
 			: mFormatType(0), mNewLine(false)
 		{
-			QStringRef s(&string);
+			QStringView s(&string);
 			parse( s, *this );
 		}
 
@@ -107,9 +107,9 @@ namespace glabels
 		}
 
 
-		bool SubstitutionField::parse( QStringRef& s, SubstitutionField& field )
+		bool SubstitutionField::parse( QStringView& s, SubstitutionField& field )
 		{
-			QStringRef sTmp = s;
+			QStringView sTmp = s;
 		
 			if ( sTmp.startsWith( "${" ) )
 			{
@@ -141,7 +141,7 @@ namespace glabels
 		}
 
 
-		bool SubstitutionField::parseFieldName( QStringRef& s, SubstitutionField& field )
+		bool SubstitutionField::parseFieldName( QStringView& s, SubstitutionField& field )
 		{
 			bool success = false;
 		
@@ -157,7 +157,7 @@ namespace glabels
 		}
 
 	
-		bool SubstitutionField::parseModifier( QStringRef& s, SubstitutionField& field )
+		bool SubstitutionField::parseModifier( QStringView& s, SubstitutionField& field )
 		{
 			bool success = false;
 		
@@ -181,7 +181,7 @@ namespace glabels
 		}
 
 	
-		bool SubstitutionField::parseDefaultValueModifier( QStringRef& s, SubstitutionField& field )
+		bool SubstitutionField::parseDefaultValueModifier( QStringView& s, SubstitutionField& field )
 		{
 			field.mDefaultValue.clear();
 
@@ -207,7 +207,7 @@ namespace glabels
 		}
 
 	
-		bool SubstitutionField::parseFormatModifier( QStringRef& s, SubstitutionField& field )
+		bool SubstitutionField::parseFormatModifier( QStringView& s, SubstitutionField& field )
 		{
 			field.mFormat = "%";
 
@@ -227,7 +227,7 @@ namespace glabels
 		}
 
 	
-		bool SubstitutionField::parseFormatFlags( QStringRef& s, SubstitutionField& field )
+		bool SubstitutionField::parseFormatFlags( QStringView& s, SubstitutionField& field )
 		{
 			while ( s.size() && QString( "-+ 0" ).contains( s[0] ) )
 			{
@@ -239,19 +239,19 @@ namespace glabels
 		}
 
 	
-		bool SubstitutionField::parseFormatWidth( QStringRef& s, SubstitutionField& field )
+		bool SubstitutionField::parseFormatWidth( QStringView& s, SubstitutionField& field )
 		{
 			return parseNaturalInteger( s, field );
 		}
 
 
-		bool SubstitutionField::parseFormatPrecision( QStringRef& s, SubstitutionField& field )
+		bool SubstitutionField::parseFormatPrecision( QStringView& s, SubstitutionField& field )
 		{
 			return parseNaturalInteger( s, field );
 		}
 
 	
-		bool SubstitutionField::parseFormatType( QStringRef& s, SubstitutionField& field )
+		bool SubstitutionField::parseFormatType( QStringView& s, SubstitutionField& field )
 		{
 			bool success = false;
 
@@ -267,7 +267,7 @@ namespace glabels
 		}
 
 	
-		bool SubstitutionField::parseNaturalInteger( QStringRef& s, SubstitutionField& field )
+		bool SubstitutionField::parseNaturalInteger( QStringView& s, SubstitutionField& field )
 		{
 			bool success = false;
 
@@ -289,7 +289,7 @@ namespace glabels
 		}
 	
 
-		bool SubstitutionField::parseNewLineModifier( QStringRef& s, SubstitutionField& field )
+		bool SubstitutionField::parseNewLineModifier( QStringView& s, SubstitutionField& field )
 		{
 			field.mNewLine = true;
 			return true;
