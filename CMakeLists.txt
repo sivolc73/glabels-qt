@@ -1,4 +1,7 @@
-cmake_minimum_required (VERSION 3.9)
+cmake_minimum_required (VERSION 3.16)
+
+set(CMAKE_C_COMPILER "/usr/bin/gcc")
+set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 
 ###############################################################################
 # gLabels Label Designer Project
