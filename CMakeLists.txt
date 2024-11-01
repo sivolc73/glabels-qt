@@ -114,7 +114,7 @@ find_package (Qt6Core REQUIRED)
 find_package (Qt6Widgets REQUIRED)
 find_package (Qt6PrintSupport REQUIRED)
 find_package (Qt6Xml REQUIRED)
-find_package (Qt6Svg REQUIRED)
+find_package (Qt6 REQUIRED COMPONENTS Svg)
 find_package (Qt6LinguistTools)
 
 if (WIN32)
@@ -152,7 +152,7 @@ endif ()
 #=======================================
 # Unit Testing
 #=======================================
-if (Qt5Test_FOUND)
+if (Qt6Test_FOUND)
   enable_testing ()
 endif ()
 
