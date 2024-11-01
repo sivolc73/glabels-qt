@@ -52,7 +52,7 @@ namespace glabels
 			mW  = 0;
 			mH  = 0;
 			mLockAspectRatio = false;
-			mMatrix = QMatrix();
+			mMatrix = QTransform();
 
 			mShadowState     = false;
 			mShadowX         = 1.3;
@@ -74,7 +74,7 @@ namespace glabels
 		                          const Distance&  w,
 		                          const Distance&  h,
 		                          bool             lockAspectRatio,
-		                          const QMatrix&   matrix,
+		                          const QTransform&   matrix,
 		                          bool             shadowState,
 		                          const Distance&  shadowX,
 		                          const Distance&  shadowY,
@@ -301,7 +301,7 @@ namespace glabels
 		///
 		/// Matrix Property Getter
 		///
-		QMatrix ModelObject::matrix() const
+		QTransform ModelObject::matrix() const
 		{
 			return mMatrix;
 		}
@@ -310,7 +310,7 @@ namespace glabels
 		///
 		/// Matrix Property Setter
 		///
-		void ModelObject::setMatrix( const QMatrix& value )
+		void ModelObject::setMatrix( const QTransform& value )
 		{
 			if ( mMatrix != value )
 			{
@@ -1131,7 +1131,7 @@ namespace glabels
 		{
 			if ( thetaDegs != 0 )
 			{
-				QMatrix m;
+				QTransform m;
 				m.rotate( thetaDegs );
 				mMatrix *= m;
 
@@ -1145,7 +1145,7 @@ namespace glabels
 		///
 		void ModelObject::flipHoriz()
 		{
-			QMatrix m;
+			QTransform m;
 			m.scale( -1, 1 );
 			mMatrix *= m;
 
@@ -1158,7 +1158,7 @@ namespace glabels
 		///
 		void ModelObject::flipVert()
 		{
-			QMatrix m;
+			QTransform m;
 			m.scale( 1, -1 );
 			mMatrix *= m;
 
