@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.9)
 ###############################################################################
 # gLabels Label Designer Project
 ###############################################################################
-project (glabels-qt VERSION "3.99.0")
+project (glabels-qt VERSION "3.99.1")
 
 #
 # Path for locally defined cmake modules
@@ -107,11 +107,11 @@ if (MINGW)
    set (CMAKE_PREFIX_PATH ${MINGW_BASE_DIR} )
 endif ()
 
-find_package (Qt5Core 5.6 REQUIRED)
-find_package (Qt5Widgets 5.6 REQUIRED)
-find_package (Qt5PrintSupport 5.6 REQUIRED)
-find_package (Qt5Xml 5.6 REQUIRED)
-find_package (Qt5Svg 5.6 REQUIRED)
+find_package (Qt5Core 5.15 REQUIRED)
+find_package (Qt5Widgets 5.15 REQUIRED)
+find_package (Qt5PrintSupport 5.15 REQUIRED)
+find_package (Qt5Xml 5.15 REQUIRED)
+find_package (Qt5Svg 5.15 REQUIRED)
 find_package (Qt5LinguistTools)
 
 if (WIN32)
@@ -128,7 +128,7 @@ find_package (GnuBarcode 0.98 QUIET)
 find_package (LibQrencode 3.4 QUIET)
 find_package (LibZint 2.6 EXACT QUIET)
 # Unit testing support
-find_package (Qt5Test 5.6 QUIET)
+find_package (Qt5Test 5.15 QUIET)
 
 
 #=======================================
