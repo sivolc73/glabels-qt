@@ -20,6 +20,7 @@
 
 #include "Distance.h"
 
+#include <QIODevice>
 #include <QTextStream>
 #include <QtDebug>
 
