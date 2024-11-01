@@ -238,7 +238,8 @@ namespace glabels
 			QSizeF pageSize( mModel->tmplate()->pageWidth().pt(), mModel->tmplate()->pageHeight().pt() );
 			printer->setPageSize( QPageSize(pageSize, QPageSize::Point) );
 			printer->setFullPage( true );
-			printer->setPageMargins( 0, 0, 0, 0, QPrinter::Point );
+			QMarginsF margins(0, 0, 0, 0);  // Left, Top, Right, Bottom
+            printer->setPageMargins(margins, QPageLayout::Point);
 
 			QPainter painter( printer );
 			
