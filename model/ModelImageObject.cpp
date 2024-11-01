@@ -29,6 +29,7 @@
 #include <QImage>
 #include <QPen>
 #include <QtDebug>
+#include <QByteArrayView>
 
 
 namespace glabels
@@ -316,7 +317,7 @@ namespace glabels
 				}
 
 				mImage = new QImage(value);
-				quint16 cs = qChecksum( (const char*)mImage->constBits(), mImage->sizeInBytes() );
+				quint16 cs = qChecksum(QByteArrayView(mImage->constBits(), mImage->sizeInBytes()));
 				mFilenameNode = TextNode( false, QString("%image_%1%").arg( cs ) );
 
 				emit changed();
