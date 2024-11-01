@@ -112,7 +112,13 @@ namespace glabels
 		{
 			Token token;
 
-			QStringView s = &mString;
+			if (mString.isEmpty()) 
+            {
+				// TODO Handle the empty case if needed, e.g., clear mTokens or log a warning
+                return; // or any other appropriate action
+            }
+
+			QStringView s = mString; //TODO add a check to make sure mString is not null
 			while ( s.size() )
 			{
 				SubstitutionField field;
