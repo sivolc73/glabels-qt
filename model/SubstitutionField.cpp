@@ -37,7 +37,7 @@ namespace glabels
 		SubstitutionField::SubstitutionField( const QString& string )
 			: mFormatType(0), mNewLine(false)
 		{
-			QStringView s(&string);
+			QStringView s(string);
 			parse( s, *this );
 		}
 
@@ -111,7 +111,7 @@ namespace glabels
 		{
 			QStringView sTmp = s;
 		
-			if ( sTmp.startsWith( "${" ) )
+			if (sTmp.startsWith(QStringLiteral("${"))) // Convert string literal to QString
 			{
 				sTmp = sTmp.mid(2);
 
