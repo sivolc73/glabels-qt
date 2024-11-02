@@ -2,7 +2,7 @@ project (glabels LANGUAGES CXX)
 
 #set(CMAKE_C_COMPILER "/usr/bin/gcc")
 #set(CMAKE_CXX_COMPILER "/usr/bin/g++")
-cmake_policy(SET CMP0028 NEW)
+#cmake_policy(SET CMP0028 NEW)
 #=======================================
 # Sources
 #=======================================
@@ -110,13 +110,13 @@ set (glabels_resource_files
   images.qrc
 )
 
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTORCC ON)
+#set(CMAKE_AUTOMOC ON)
+#set(CMAKE_AUTOUIC ON)
+#set(CMAKE_AUTORCC ON)
 
-#qt5_wrap_cpp (glabels_moc_sources ${glabels_qobject_headers})
-#qt5_wrap_ui (glabels_forms_headers ${glabels_forms})
-#qt5_add_resources (glabels_qrc_sources ${glabels_resource_files})
+qt6_wrap_cpp (glabels_moc_sources ${glabels_qobject_headers})
+qt6_wrap_ui (glabels_forms_headers ${glabels_forms})
+qt6_add_resources (glabels_qrc_sources ${glabels_resource_files})
 
 
 if (WIN32)

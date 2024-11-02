@@ -16,6 +16,7 @@ endif ()
 # Auto-generated files
 configure_file (Version.h.in ${CMAKE_CURRENT_BINARY_DIR}/Version.h @ONLY)
 configure_file (Config.h.in ${CMAKE_CURRENT_BINARY_DIR}/Config.h @ONLY)
+set(CMAKE_AUTOUIC ON)
 
 set (Model_sources
   Category.cpp
