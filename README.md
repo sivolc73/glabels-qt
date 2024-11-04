@@ -1,15 +1,31 @@
-![gLabels Label Designer](glabels/images/glabels-label-designer.png)
+## A note from this branch's maintainer
 
-![Cover Image](docs/images/cover-image.png)
+I am currently trying to revive this amazing software that has not received updates in over 4 years. 
 
-[![Travis Build Status](https://travis-ci.org/jimevins/glabels-qt.svg?branch=master)](https://travis-ci.org/jimevins/glabels-qt)
-[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/jimevins/glabels-qt?branch=master&svg=true)](https://ci.appveyor.com/project/jimevins/glabels-qt)
+Being build with QT5 this app is slowly getting less compatible and present some challenge for Ubuntu users using Wayland.
+The current goal is to port it to QT6 and make sure it is stable on as many plasftorm and distro as possible.
+Once ported I'll try to agregate the various fixes and translations that other branches have brought over time, a lot of 
+deprecated calls are still present in the code and fixing all this will be a good first step
+
+When all of this is done and if possible it would be amazing to update the original glabel in the ubuntu repository, as amazing as 
+this software is it will never get used widely if you need to compile it or install manually dependencies in order to run it.
+
+As a long term goal it would be interesting to see if support for Brother P-touch printers could be added, there is currently no
+alternative running in Linux to the Windows/Mac software from Brother.
 
 *******************************************************************************
 
 ## What is gLabels-qt?
 
 gLabels-qt is the development version of the next major version of gLabels (a.k.a. glabels-4).
+
+*******************************************************************************
+
+![gLabels Label Designer](glabels/images/glabels-label-designer.png)
+
+![Cover Image](docs/images/cover-image.png)
+
+*******************************************************************************
 
 
 ## What's new in gLabels 4?
@@ -27,25 +43,6 @@ gLabels-qt is the development version of the next major version of gLabels (a.k.
 ### Latest Release
 
 There are currently no official releases of gLabels 4.
-
-### Continuous Integration Snapshots
-
-Continuous integration snapshots are not official releases.  These snapshots represent the latest
-bleeding-edge development (unstable) code.  Please, DO NOT use it in a production environment.  Do not
-expect compatibility or consistency of features between snapshots.
-
-Pre-release Linux [AppImage](http:appimage.org) and Windows installer binaries are available in
-**[Releases](https://github.com/jimevins/glabels-qt/releases)**.
-
-Some third-party packages are also available:
-
-
-| Platform  | Files                                                                                | Notes                                                         |
-|:----------|:-------------------------------------------------------------------------------------|:--------------------------------------------------------------|
-| Archlinux | [Archlinux User Repository Page](https://aur.archlinux.org/packages/glabels-qt-git/) | Maintained by [Mario Blättermann](https://github.com/mariobl) |
-| Ubuntu    | [PPA Page](https://code.launchpad.net/~krisives/+archive/ubuntu/glabels-qt)          | Maintained by [Kristopher Ives](https://github.com/krisives)  |
-
-
 
 ## Build Instructions
 
