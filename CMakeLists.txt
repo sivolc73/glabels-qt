@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.16)
 
-set(CMAKE_C_COMPILER "/usr/bin/gcc")
-set(CMAKE_CXX_COMPILER "/usr/bin/g++")
+#set(CMAKE_C_COMPILER "/usr/bin/gcc")
+#set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 
 ###############################################################################
 # gLabels Label Designer Project
@@ -115,7 +115,7 @@ find_package (Qt6Widgets REQUIRED)
 find_package (Qt6PrintSupport REQUIRED)
 find_package (Qt6Xml REQUIRED)
 find_package (Qt6 REQUIRED COMPONENTS Svg)
-find_package (Qt6LinguistTools)
+find_package (Qt6LinguistTools REQUIRED)
 
 if (WIN32)
    # Locate Qt directories
