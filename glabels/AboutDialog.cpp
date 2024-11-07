@@ -39,6 +39,7 @@ namespace glabels
 		setupUi( this );
 
 		QString version = tr("Version") + " " + model::Version::LONG_STRING;
+		QString qtVersion = tr("QT Version") + " " + QString("%1").arg(QT_VERSION_STR);
 	
 		QString description = tr("A program to create labels and business cards.");
 	
@@ -58,6 +59,7 @@ namespace glabels
 	
 		QString markup =
 			"<p align='center'>" + version + "</p>" +
+			"<p align='center'>" + qtVersion + "</p>" +
 			"<p align='center'>" + description + "</p>" +
 			"<p align='center'>" + copyright + "</p>" +
 			"<p align='left'>"   + licenseParagraph1 + "</p>" +
