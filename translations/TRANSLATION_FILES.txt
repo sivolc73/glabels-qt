@@ -16,6 +16,7 @@ set (GLABELS_TS_FILES
   glabels_es.ts
   glabels_fi.ts
   glabels_fr.ts
+  glabels_fr_CA.ts
   glabels_gl.ts
   glabels_hu.ts
   glabels_id.ts
