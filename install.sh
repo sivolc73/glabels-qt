@@ -20,20 +20,18 @@ helpFunction() {
    echo
    echo "Usage: $0 [-d | -b | -i | -u | -h ]"
    echo
-   echo "\t-d Install dependencies"
+   echo "\t-d (root)Install dependencies"
    echo "\t-b Build gLabels"
    echo "\t-i (root) Build and install gLabels"
    echo "\t-u (root) Uninstall gLabels"
    echo "\t-h Display this help menu"
    echo "====================================================="
-   exit 1 # Exit script after printing help
+   exit 1
 }
 
-supportedcheck() {
-   # Combine distribution and version into a single string
+supportedCheck() {
    local distro_version="$1 $2"
 
-   # Check if the distribution and version are in the supported list
    if [ "$distro_version" = "Pop!_OS 22.04" ] ||
       [ "$distro_version" = "Fedora Linux 41" ] ||
       [ "$distro_version" = "Ubuntu 22.04" ]; then
@@ -43,16 +41,66 @@ supportedcheck() {
    fi
 }
 
+installDependencies() {
+   echo
+   echo "====================================================="
+   echo "Installing cmake and g++..."
+   echo "====================================================="
+   if [ "$distribution" = "Fedora Linux" ]; then
+      dnf install cmake g++ -y
+   else
+      apt install cmake g++ -y
+   fi
+   echo
+   echo "====================================================="
+   echo "Installing dependencies for $distribution..."
+   echo "====================================================="
+   if [ "$distribution" = "Pop!_OS" ]; then
+      sudo apt install qt6-base-dev qt6-tools-dev libqt6svg6-dev -y
+   elif [ "$distribution" = "Fedora Linux" ]; then
+      dnf install qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools-devel -y
+   elif [ "$distribution" = "Ubuntu" -a "$versionId" = "22.04" ]; then
+      sudo apt install qt6-base-dev qt6-tools-dev libqt6svg6-dev
+   else
+      apt install qt6-base-dev qt6-tools-dev qt6-svg-dev -y
+   fi
+   return 0
+}
+buildGlabels() {
+   echo "====================================================="
+   echo "Building gLabels..."
+   echo "====================================================="
+   echo
+   rm -r build
+   mkdir build
+   cd build
+   cmake ..
+   make
+}
+
+installGlabels() {
+   echo "====================================================="
+   echo "Installing gLabels..."
+   echo "====================================================="
+      echo
+      if [ -f "build/glabels/glabels-qt" ]; then
+         echo "Installing gLabels..."
+         cd build
+         make install
+      else
+         echo "You need to build it first!"
+      fi
+}
+
+
+
 if [ -f /etc/os-release ]; then
-   # Source the os-release file to extract variables
    . /etc/os-release
 
-   # Set the distribution and version variables
    distribution="$NAME"
    version="$VERSION"
    versionId="$VERSION_ID"
-
-   # Optionally, print them out
+   echo
    echo "Running $distribution $version"
 else
    echo "Could not determine the distribution, assuming Ubuntu 22.04 LTS."
@@ -60,7 +108,7 @@ else
    version="22.04 LTS"
 fi
 
-if supportedcheck "$distribution" "$versionId"; then
+if supportedCheck "$distribution" "$versionId"; then
    echo "Your distribution is supported"
    echo
 fi
@@ -74,62 +122,50 @@ if [ "$#" -eq 0 ]; then
    exit 1
 fi
 
-while getopts "dbiuh" opt; do
+while getopts "adbiuh" opt; do
    case ${opt} in
-   d)
+   a)
       if [ "$is_root" = false ]; then
-         echo "You need to run this script as root to install dependencies"
+         echo "Don't run this as root!"
          exit 1
       fi
-      echo
-      echo "====================================================="
-      echo "Installing cmake and g++..."
-      echo "====================================================="
-      if [ "$distribution" = "Fedora Linux" ]; then
-         dnf install cmake g++ -y
-      else
-         apt install cmake g++ -y
-      fi
-      echo
-      echo "====================================================="
-      echo "Installing dependencies for $distribution..."
-      echo "====================================================="
-      if [ "$distribution" = "Pop!_OS" ]; then
-         sudo apt install qt6-base-dev qt6-tools-dev libqt6svg6-dev -y
-      elif [ "$distribution" = "Fedora Linux" ]; then
-         dnf install qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools-devel -y
-      else
-         apt install qt6-base-dev qt6-tools-dev qt6-svg-dev -y
-      fi
+      echo "Please enter your root password to launch automatic install"
+      sudo echo Thank you
 
+      installDependencies
+      buildGlabels
+      cd ..
+      chown -R "$USER":"$USER" /build
+      installGlabels
+      echo "Done!"
+      ;;
+   d)
+      if [ "$is_root" = false ]; then
+         echo "You need to run this as root to install dependencies"
+         exit 1
+      fi
+      installDependencies
+      echo "Done!"
       ;;
    b)
-      echo "Building gLabels..."
-      echo
-      rm -r build
-      mkdir build
-      cd build
-      cmake ..
-      make
+      if [ "$is_root" = true ]; then
+         echo "Don't run this as root!"
+         exit 1
+      fi
+      buildGlabels
+      echo "Done!"
       ;;
    i)
       if [ "$is_root" = false ]; then
-         echo "You need to run this script as root to install gLabels"
+         echo "You need to run this as root to install gLabels"
          exit 1
       fi
-      echo "Installing gLabels..."
-      echo
-      if [ -f "build/glabels/glabels-qt" ]; then
-         echo "Installing gLabels..."
-         cd build
-         make install
-      else
-         echo "You need to build it first!"
-      fi
+      installGlabels
+      echo "Done"
       ;;
    u)
       if [ "$is_root" = false ]; then
-         echo "You need to run this script as root to uninstall gLabels"
+         echo "You need to run this as root to uninstall gLabels"
          exit 1
       fi
       echo "Uninstalling gLabels..."
