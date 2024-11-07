@@ -67,3 +67,29 @@ $ cmake ..
 $ make
 $ sudo make install
 ```
+## Example: Fedora 35
+
+### Installing Prerequisites
+We assume the build system already has things like cmake and the GNU C++ suite installed.
+
+```
+$ sudo dnf install qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools-devel
+```
+These installs will pull in additional packages to fill out their prerequisites.
+Fedora has a different package naming scheme that Ubuntu. This is to distinguish the QT5
+packages from the QT3 and QT4 packages that they still support for compatibility.
+If the Cmake pass or build has missing package errors or warnings, you can search for the needed
+package with:
+```
+$ sudo dnf search qt6 |grep <package name substring>
+```
+
+### Compile and Install gLabels into /usr/local
+```
+$ cd glabels-qt
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+$ sudo make install
+```

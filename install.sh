@@ -1,15 +1,13 @@
 #!/bin/bash
 
-
 # qt6-base-dev for QT core
 # qt6-tools-dev for linguist packages
 # qt6-svg-dev for SVG on Ubuntu
-# libqt6svg6-dev for SVG on Pop!_OS 
-
-
+# libqt6svg6-dev for SVG on Pop!_OS
 
 distribution=""
 version=""
+versionId=""
 is_root=false
 
 helpFunction() {
@@ -36,8 +34,9 @@ supportedcheck() {
    local distro_version="$1 $2"
 
    # Check if the distribution and version are in the supported list
-   if [ "$distro_version" = "Pop!_OS 22.04 LTS" ] ||
-      [ "$distro_version" = "Ubuntu 22.04 LTS" ]; then
+   if [ "$distro_version" = "Pop!_OS 22.04" ] ||
+      [ "$distro_version" = "Fedora Linux 41" ] ||
+      [ "$distro_version" = "Ubuntu 22.04" ]; then
       return 0 # Supported
    else
       return 1 # Not supported
@@ -51,6 +50,7 @@ if [ -f /etc/os-release ]; then
    # Set the distribution and version variables
    distribution="$NAME"
    version="$VERSION"
+   versionId="$VERSION_ID"
 
    # Optionally, print them out
    echo "Running $distribution $version"
@@ -60,7 +60,7 @@ else
    version="22.04 LTS"
 fi
 
-if supportedcheck "$distribution" "$version"; then
+if supportedcheck "$distribution" "$versionId"; then
    echo "Your distribution is supported"
    echo
 fi
@@ -85,15 +85,21 @@ while getopts "dbiuh" opt; do
       echo "====================================================="
       echo "Installing cmake and g++..."
       echo "====================================================="
-      apt install cmake g++
+      if [ "$distribution" = "Fedora Linux" ]; then
+         dnf install cmake g++ -y
+      else
+         apt install cmake g++ -y
+      fi
       echo
       echo "====================================================="
       echo "Installing dependencies for $distribution..."
       echo "====================================================="
       if [ "$distribution" = "Pop!_OS" ]; then
-      sudo apt install qt6-base-dev qt6-tools-dev libqt6svg6-dev
+         sudo apt install qt6-base-dev qt6-tools-dev libqt6svg6-dev -y
+      elif [ "$distribution" = "Fedora Linux" ]; then
+         dnf install qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools-devel -y
       else
-      apt install qt6-base-dev qt6-tools-dev qt6-svg-dev
+         apt install qt6-base-dev qt6-tools-dev qt6-svg-dev -y
       fi
 
       ;;
