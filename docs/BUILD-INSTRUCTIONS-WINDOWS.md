@@ -14,14 +14,14 @@ Visual Studio
 
 - Visual Studio (these instructions are for _Visual Studio 15 2017 Win64_)
 - CMake 3.2+
-- Qt5 5.9+ for your version of Visual Studio
+- Qt6 6.8+ for your version of Visual Studio
 - NSIS 3.03+ (optional -- for creating an installer)
 
 Make sure that CMake and the Qt tools are in your executable search path.  For example, you may need to add something like the following to your PATH environment variable:
 
 ```
 c:\Program Files\CMake\bin
-c:\Qt\5.9.3\msvc2017_64\bin
+c:\Qt\6.8.0\msvc2022_64\bin
 ```
 
 The exact paths will depend on the version of Qt and CMake you have installed.
@@ -34,7 +34,7 @@ From a Windows Power Shell, use CMake to create and build a Visual Studio Soluti
 &gt; cd <i>glabels_source_directory</i>
 &gt; mkdir build
 &gt; cd build
-&gt; cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_PREFIX_PATH="c:\qt\5.9.3\msvc2017_64" ..
+&gt; cmake -G "Visual Studio 17 2022" -DCMAKE_PREFIX_PATH="c:\Qt\6.8.0\msvc2022_64" ..
 &gt; cmake --build . --config Release 
 </pre>
 
