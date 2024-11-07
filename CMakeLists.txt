@@ -17,8 +17,8 @@ set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/"
 #=======================================
 # Version Information
 #=======================================
-set (WEBSITE  "glabels.org")
-set (BUG_WEBSITE  "https://github.com/jimevins/glabels-qt/issues")
+set (WEBSITE  "https://github.com/sivolc73/glabels-qt/")
+set (BUG_WEBSITE  "https://github.com/sivolc73/glabels-qt/issues")
 
 execute_process(
   COMMAND git symbolic-ref --short HEAD
