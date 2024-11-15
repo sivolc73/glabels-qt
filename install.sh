@@ -74,7 +74,7 @@ installDependencies() {
    fi
    echo
    echo "======================================================================"
-   echo "Installing dependencies for $distribution using $PACKAGE_MANAGER..."
+   echo "Installing dependencies for $distribution..."
    echo "======================================================================"
    if [ "$distribution" = "Pop!_OS" ]; then
       sudo apt install qt6-base-dev qt6-tools-dev libqt6svg6-dev -y
@@ -91,7 +91,6 @@ installDependencies() {
    fi
    return 0
 }
-
 buildGlabels() {
    echo "======================================================================"
    echo "Building gLabels..."
