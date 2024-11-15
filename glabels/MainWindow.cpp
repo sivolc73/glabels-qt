@@ -1055,7 +1055,6 @@ namespace glabels
 		bool showEditorToolBar  = settings.value( "showEditToolBar",    true ).toBool();
 		bool showGrid           = settings.value( "showGrid",           true ).toBool();
 		bool showMarkup         = settings.value( "showMarkup",         true ).toBool();
-		bool m_isDarkMode         = settings.value( "isDarkMode",         false ).toBool();
 		settings.endGroup();
 
 		viewFileToolBarAction   ->setChecked( showFileToolBar );
@@ -1067,6 +1066,10 @@ namespace glabels
 		editorToolBar ->setVisible(       showEditorToolBar );
 		mLabelEditor  ->setGridVisible(   showGrid );
 		mLabelEditor  ->setMarkupVisible( showMarkup );
+
+		settings.beginGroup( "Appearance" );
+		m_isDarkMode = settings.value( "isDarkMode", false ).toBool();
+		settings.endGroup();
 
 		applyTheme(m_isDarkMode);
 
@@ -1119,11 +1122,15 @@ namespace glabels
 			newPalette.setColor( QPalette::Highlight, QColor( 42, 130, 218 ) );
 			newPalette.setColor( QPalette::HighlightedText, Qt::black );
 		}
+
 		QApplication::setPalette( newPalette );
 
-		QSettings settings;
-		settings.setValue( "isDarkMode", isDarkMode );
 		m_isDarkMode = isDarkMode;
+
+		QSettings settings;
+		settings.beginGroup( "Appearance" );
+		settings.setValue( "isDarkMode", m_isDarkMode );
+		settings.endGroup();
 	}
 
 

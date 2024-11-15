@@ -53,9 +53,9 @@ namespace glabels
 			break;
 		}
 
-		m_isDarkMode = m_mainWindow->isDarkMode(); //TODO figure out why it doesn't initialize with the correct state
+		isDarkMode = m_mainWindow->isDarkMode(); //TODO figure out why it doesn't initialize with the correct state
 
-		if (m_isDarkMode == true) {
+		if (isDarkMode == true) {
 			themeDarkRadio->setChecked(true);
 		} else {
 			themeLightRadio->setChecked(true);
@@ -96,20 +96,20 @@ namespace glabels
 	///
 	void PreferencesDialog::onThemeRadiosChanged()
 	{
-		m_isDarkMode = themeDarkRadio->isChecked();
+		isDarkMode = themeDarkRadio->isChecked();
 
-		if (m_mainWindow->isDarkMode() == m_isDarkMode)
+		if (m_mainWindow->isDarkMode() == isDarkMode)
         return;
 
 		if ( themeLightRadio->isChecked() )
 		{
-			m_isDarkMode = false;
-			m_mainWindow->applyTheme(m_isDarkMode);
+			isDarkMode = false;
+			m_mainWindow->applyTheme(isDarkMode);
 		}
 		else
 		{
-			m_isDarkMode = true;
-			m_mainWindow->applyTheme(m_isDarkMode);
+			isDarkMode = true;
+			m_mainWindow->applyTheme(isDarkMode);
 		}
 	}
 

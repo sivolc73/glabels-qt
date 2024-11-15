@@ -51,7 +51,7 @@ namespace glabels
 		void onThemeRadiosChanged();
 
 	private:
-	    bool m_isDarkMode;
+	    bool isDarkMode;
         MainWindow* m_mainWindow;
 
 	};
