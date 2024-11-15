@@ -6,14 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>318</width>
-    <height>295</height>
+    <width>240</width>
+    <height>312</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>gLabels - Preferences</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Close</set>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
@@ -90,16 +100,53 @@
        </item>
       </layout>
      </widget>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Close</set>
-     </property>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Appearance</string>
+      </attribute>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>200</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Select a color theme</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>200</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Themes</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="1" column="0">
+         <widget class="QRadioButton" name="themeLightRadio">
+          <property name="text">
+           <string>Light</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QRadioButton" name="themeDarkRadio">
+          <property name="text">
+           <string>Dark</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -123,50 +170,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>unitsPointsRadio</sender>
+   <sender>unitsPicasRadio</sender>
    <signal>clicked()</signal>
    <receiver>PreferencesDialog</receiver>
    <slot>onUnitsRadiosChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>269</x>
-     <y>184</y>
+     <x>243</x>
+     <y>215</y>
     </hint>
     <hint type="destinationlabel">
-     <x>298</x>
-     <y>105</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>unitsInchesRadio</sender>
-   <signal>clicked()</signal>
-   <receiver>PreferencesDialog</receiver>
-   <slot>onUnitsRadiosChanged()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>269</x>
-     <y>102</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>298</x>
-     <y>139</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>unitsMillimetersRadio</sender>
-   <signal>clicked()</signal>
-   <receiver>PreferencesDialog</receiver>
-   <slot>onUnitsRadiosChanged()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>269</x>
-     <y>131</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>298</x>
-     <y>172</y>
+     <x>295</x>
+     <y>215</y>
     </hint>
    </hints>
   </connection>
@@ -187,24 +202,89 @@
    </hints>
   </connection>
   <connection>
-   <sender>unitsPicasRadio</sender>
+   <sender>unitsMillimetersRadio</sender>
    <signal>clicked()</signal>
    <receiver>PreferencesDialog</receiver>
    <slot>onUnitsRadiosChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>243</x>
-     <y>215</y>
+     <x>269</x>
+     <y>131</y>
     </hint>
     <hint type="destinationlabel">
-     <x>295</x>
-     <y>215</y>
+     <x>298</x>
+     <y>172</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>unitsInchesRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onUnitsRadiosChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>269</x>
+     <y>102</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>298</x>
+     <y>139</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>unitsPointsRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onUnitsRadiosChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>269</x>
+     <y>184</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>298</x>
+     <y>105</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>themeDarkRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onThemeRadiosChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>120</x>
+     <y>136</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>119</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>themeLightRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onThemeRadiosChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>120</x>
+     <y>109</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>119</x>
+     <y>155</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
   <slot>onUnitsRadiosChanged()</slot>
+  <slot>onThemeRadiosChanged()</slot>
   <slot>onPreferedPaperSizesRadiosChanged()</slot>
  </slots>
 </ui>

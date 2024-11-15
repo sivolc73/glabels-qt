@@ -21,9 +21,10 @@
 #ifndef PreferencesDialog_h
 #define PreferencesDialog_h
 
-
+#include "MainWindow.h"
 #include "ui_PreferencesDialog.h"
 
+class MainWindow;
 
 namespace glabels
 {
@@ -39,7 +40,7 @@ namespace glabels
 		// Life Cycle
 		/////////////////////////////////
 	public:
-		PreferencesDialog( QWidget *parent = nullptr );
+    explicit PreferencesDialog(MainWindow *mainWindow, QWidget *parent = nullptr);
 
 
 		/////////////////////////////////
@@ -47,6 +48,11 @@ namespace glabels
 		/////////////////////////////////
 	private slots:
 		void onUnitsRadiosChanged();
+		void onThemeRadiosChanged();
+
+	private:
+	    bool m_isDarkMode;
+        MainWindow* m_mainWindow;
 
 	};
 

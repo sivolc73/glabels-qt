@@ -42,6 +42,7 @@ int main( int argc, char **argv )
 {
 	QApplication app( argc, argv );
 
+	QApplication::setStyle("Fusion");
 	QCoreApplication::setOrganizationName( "glabels.org" );
 	QCoreApplication::setOrganizationDomain( "glabels.org" );
 	QCoreApplication::setApplicationName( "glabels-qt" );

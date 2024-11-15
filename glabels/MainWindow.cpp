@@ -41,6 +41,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QStatusBar>
+#include <QPalette>
 #include <QtDebug>
 
 
@@ -1054,6 +1055,7 @@ namespace glabels
 		bool showEditorToolBar  = settings.value( "showEditToolBar",    true ).toBool();
 		bool showGrid           = settings.value( "showGrid",           true ).toBool();
 		bool showMarkup         = settings.value( "showMarkup",         true ).toBool();
+		bool m_isDarkMode         = settings.value( "isDarkMode",         false ).toBool();
 		settings.endGroup();
 
 		viewFileToolBarAction   ->setChecked( showFileToolBar );
@@ -1065,6 +1067,9 @@ namespace glabels
 		editorToolBar ->setVisible(       showEditorToolBar );
 		mLabelEditor  ->setGridVisible(   showGrid );
 		mLabelEditor  ->setMarkupVisible( showMarkup );
+
+		applyTheme(m_isDarkMode);
+
 	}
 
 
@@ -1081,6 +1086,53 @@ namespace glabels
 		settings.setValue( "showGrid",           viewGridAction->isChecked() );
 		settings.setValue( "showMarkup",         viewMarkupAction->isChecked() );
 		settings.endGroup();
+	}
+
+
+	///
+	/// Apply color theme
+	///
+	void MainWindow::applyTheme( bool isDarkMode )
+	{
+		QPalette newPalette;
+		if ( isDarkMode )
+		{
+			newPalette.setColor( QPalette::Window, QColor( 53, 53, 53 ) );
+			newPalette.setColor( QPalette::WindowText, Qt::white );
+			newPalette.setColor( QPalette::Base, QColor( 42, 42, 42 ) );
+			newPalette.setColor( QPalette::AlternateBase, QColor( 66, 66, 66 ) );
+			newPalette.setColor( QPalette::Text, Qt::white );
+			newPalette.setColor( QPalette::Button, QColor( 53, 53, 53 ) );
+			newPalette.setColor( QPalette::ButtonText, Qt::white );
+			newPalette.setColor( QPalette::Highlight, QColor( 42, 130, 218 ) );
+			newPalette.setColor( QPalette::HighlightedText, Qt::black );
+		}
+		else
+		{
+			newPalette.setColor( QPalette::Window, QColor( 255, 255, 255 ) );
+			newPalette.setColor( QPalette::WindowText, Qt::black );
+			newPalette.setColor( QPalette::Base, QColor( 255, 255, 255 ) );
+			newPalette.setColor( QPalette::AlternateBase, QColor( 240, 240, 240 ) );
+			newPalette.setColor( QPalette::Text, Qt::black );
+			newPalette.setColor( QPalette::Button, QColor( 240, 240, 240 ) );
+			newPalette.setColor( QPalette::ButtonText, Qt::black );
+			newPalette.setColor( QPalette::Highlight, QColor( 42, 130, 218 ) );
+			newPalette.setColor( QPalette::HighlightedText, Qt::black );
+		}
+		QApplication::setPalette( newPalette );
+
+		QSettings settings;
+		settings.setValue( "isDarkMode", isDarkMode );
+		m_isDarkMode = isDarkMode;
+	}
+
+
+	///
+	/// Is window empty?
+	///
+	bool MainWindow::isDarkMode() const
+	{
+		return m_isDarkMode;
 	}
 
 
@@ -1374,8 +1426,8 @@ namespace glabels
 	///
 	void MainWindow::editPreferences()
 	{
-		PreferencesDialog dialog( this );
-		dialog.exec();
+		PreferencesDialog* dialog = new PreferencesDialog(this);
+		dialog->exec();
 	}
 
 

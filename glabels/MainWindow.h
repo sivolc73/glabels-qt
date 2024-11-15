@@ -73,6 +73,15 @@ namespace glabels
 		model::Model* model() const;
 		void setModel( model::Model* model );
 		bool isEmpty() const;
+        bool isDarkMode() const;
+		void applyTheme(bool isDarkMode);
+
+
+		/////////////////////////////////////
+		// Private Methods
+		/////////////////////////////////////
+	private:
+        bool m_isDarkMode;
 
 
 		/////////////////////////////////////

@@ -19,7 +19,7 @@
  */
 
 #include "PreferencesDialog.h"
-
+#include "MainWindow.h" 
 #include "model/Settings.h"
 
 
@@ -29,8 +29,8 @@ namespace glabels
 	///
 	/// Constructor
 	///
-	PreferencesDialog::PreferencesDialog( QWidget *parent )
-		: QDialog(parent)
+	PreferencesDialog::PreferencesDialog(MainWindow* mainWindow, QWidget* parent )
+		: QDialog(parent), m_mainWindow(mainWindow)
 	{
 		setupUi( this );
 
@@ -52,6 +52,15 @@ namespace glabels
 			unitsPointsRadio->setChecked( true );
 			break;
 		}
+
+		m_isDarkMode = m_mainWindow->isDarkMode(); //TODO figure out why it doesn't initialize with the correct state
+
+		if (m_isDarkMode == true) {
+			themeDarkRadio->setChecked(true);
+		} else {
+			themeLightRadio->setChecked(true);
+		}
+
 	}
 
 
@@ -79,6 +88,28 @@ namespace glabels
 		else
 		{
 			model::Settings::setUnits( model::Units::pt() );
+		}
+	}
+
+    ///
+	/// Theme Radios Changed
+	///
+	void PreferencesDialog::onThemeRadiosChanged()
+	{
+		m_isDarkMode = themeDarkRadio->isChecked();
+
+		if (m_mainWindow->isDarkMode() == m_isDarkMode)
+        return;
+
+		if ( themeLightRadio->isChecked() )
+		{
+			m_isDarkMode = false;
+			m_mainWindow->applyTheme(m_isDarkMode);
+		}
+		else
+		{
+			m_isDarkMode = true;
+			m_mainWindow->applyTheme(m_isDarkMode);
 		}
 	}
 
