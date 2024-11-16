@@ -11,7 +11,7 @@ versionId=""
 is_root=false
 
 helpFunction() {
-   echo "====================================================="
+   echo "======================================================================"
    echo "gLabels automatic compiler, installer and uninstaller"
    echo
    echo "This script is currently working with:"
@@ -25,7 +25,7 @@ helpFunction() {
    echo "\t-i (root) Build and install gLabels"
    echo "\t-u (root) Uninstall gLabels"
    echo "\t-h Display this help menu"
-   echo "====================================================="
+   echo "======================================================================"
    exit 1
 }
 
@@ -41,20 +41,41 @@ supportedCheck() {
    fi
 }
 
+detect_package_manager() {
+    if command -v apt >/dev/null 2>&1; then
+        echo "apt"
+    elif command -v dnf >/dev/null 2>&1; then
+        echo "dnf"
+    elif command -v yum >/dev/null 2>&1; then
+        echo "yum"
+    elif command -v pacman >/dev/null 2>&1; then
+        echo "pacman"
+    elif command -v zypper >/dev/null 2>&1; then
+        echo "zypper"
+    elif command -v apk >/dev/null 2>&1; then
+        echo "apk"
+    else
+        echo "Unsupported package manager"
+        return 1
+    fi
+}
+
 installDependencies() {
+   PACKAGE_MANAGER=$(detect_package_manager)
+   echo "Using $PACKAGE_MANAGER"
    echo
-   echo "====================================================="
+   echo "======================================================================"
    echo "Installing cmake and g++..."
-   echo "====================================================="
+   echo "======================================================================"
    if [ "$distribution" = "Fedora Linux" ]; then
       dnf install cmake g++ -y
    else
       apt install cmake g++ -y
    fi
    echo
-   echo "====================================================="
+   echo "======================================================================"
    echo "Installing dependencies for $distribution..."
-   echo "====================================================="
+   echo "======================================================================"
    if [ "$distribution" = "Pop!_OS" ]; then
       sudo apt install qt6-base-dev qt6-tools-dev libqt6svg6-dev -y
    elif [ "$distribution" = "Fedora Linux" ]; then
@@ -62,14 +83,18 @@ installDependencies() {
    elif [ "$distribution" = "Ubuntu" -a "$versionId" = "22.04" ]; then
       sudo apt install qt6-base-dev qt6-tools-dev libqt6svg6-dev
    else
-      apt install qt6-base-dev qt6-tools-dev qt6-svg-dev -y
+      if [ "$PACKAGE_MANAGER" = "apt" ]; then
+      apt install qt6-base-dev qt6-tools-dev qt6-svg-dev libqt6svg6-dev -y
+      elif [ "$PACKAGE_MANAGER" = "dnf" ]; then
+      dnf install qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools-devel -y
+      fi
    fi
    return 0
 }
 buildGlabels() {
-   echo "====================================================="
+   echo "======================================================================"
    echo "Building gLabels..."
-   echo "====================================================="
+   echo "======================================================================"
    echo
    rm -r build
    mkdir build
@@ -79,9 +104,9 @@ buildGlabels() {
 }
 
 installGlabels() {
-   echo "====================================================="
+   echo "======================================================================"
    echo "Installing gLabels..."
-   echo "====================================================="
+   echo "======================================================================"
       echo
       if [ -f "build/glabels/glabels-qt" ]; then
          echo "Installing gLabels..."
@@ -103,9 +128,10 @@ if [ -f /etc/os-release ]; then
    echo
    echo "Running $distribution $version"
 else
-   echo "Could not determine the distribution, assuming Ubuntu 22.04 LTS."
-   distribution="Ubuntu"
-   version="22.04 LTS"
+   echo "Could not determine the distribution, you are not officially supported"
+   distribution="Unknown"
+   version="Unknown"
+   versionId="Unknown"
 fi
 
 if supportedCheck "$distribution" "$versionId"; then
