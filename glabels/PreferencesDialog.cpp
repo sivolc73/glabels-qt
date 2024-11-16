@@ -53,7 +53,7 @@ namespace glabels
 			break;
 		}
 
-		isDarkMode = m_mainWindow->isDarkMode(); //TODO figure out why it doesn't initialize with the correct state
+		isDarkMode = m_mainWindow->isDarkMode();
 
 		if (isDarkMode == true) {
 			themeDarkRadio->setChecked(true);
