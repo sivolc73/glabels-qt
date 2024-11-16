@@ -180,7 +180,7 @@ message (STATUS "Installation prefix ..... " ${CMAKE_INSTALL_PREFIX})
 message (STATUS "Source code location .... " ${glabels_SOURCE_DIR})
 message (STATUS "CMake version ........... " ${CMAKE_VERSION})
 message (STATUS "C++ Compiler ............ " ${CMAKE_CXX_COMPILER_ID} " " ${CMAKE_CXX_COMPILER} " " ${CMAKE_CXX_COMPILER_VERSION})
-message (STATUS "Qt version .............. " ${Qt5Core_VERSION})
+message (STATUS "Qt version .............. " ${Qt6Core_VERSION})
 
 if (ZLIB_FOUND)
   message (STATUS "zlib (optional).......... " ${ZLIB_VERSION_STRING})
