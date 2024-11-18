@@ -59,7 +59,7 @@ void TestModel::model()
 	model.clearModified();
 	QVERIFY( !model.isModified() );
 
-	QVERIFY( model.shortName().contains( QRegExp( "^Untitled[1-9][0-9]*$" ) ) );
+	QVERIFY( model.shortName().contains( QRegularExpression( "^Untitled[1-9][0-9]*$" ) ) );
 	model.setFileName( "dir/file1.ext" );
 	QCOMPARE( model.fileName(), QString( "dir/file1.ext" ) );
 	QCOMPARE( model.shortName(), QString( "file1" ) );
